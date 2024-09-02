@@ -1,0 +1,30 @@
+volumes:
+  axonserver-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: C:data
+      o: bind
+  axonserver-events:
+    driver: local
+    driver_opts:
+      type: none
+      device: C:events
+      o: bind
+  axonserver-config:
+    driver: local
+    driver_opts:
+      type: none
+      device: C:config
+      o: bind
+
+services:
+  axonserver:
+    image: axoniq/axonserver:4.5.8-jdk-17-dev-nonroot
+    ports:
+      - "8024:8024"
+      - "8124:8124"
+    hostname: axonserver
+
+    environment:
+      - AXONIQ_AXONSERVER_STANDALONE=true
